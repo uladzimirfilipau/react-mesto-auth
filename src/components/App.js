@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { useState, useEffect, } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 import Header from './Header';
@@ -16,6 +16,8 @@ import api from '../utils/api.js';
 import handleError from '../utils/utils.js';
 
 import Register from './Register';
+import Login from './Login';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -122,7 +124,11 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
 
-        <Main
+        <ProtectedRoute
+          exact
+          path='/'
+          loggedIn={loggedIn}
+          component={Main}
           onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
@@ -139,6 +145,8 @@ function App() {
           <Route path='/sign-in'>
             <Login onLogin={handleLogin} />
           </Route>
+
+          <Route>{loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-up' />}</Route>
         </Switch>
         <Footer />
 
