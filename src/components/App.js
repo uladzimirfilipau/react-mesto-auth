@@ -18,6 +18,7 @@ import handleError from '../utils/utils.js';
 import Register from './Register';
 import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
+import InfoTooltip from './InfoTooltip';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -26,6 +27,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
 
   // GET DATA
   useEffect(() => {
@@ -117,6 +119,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
+    setIsInfoTooltipOpen(false);
   }
 
   return (
@@ -149,6 +152,13 @@ function App() {
           <Route>{loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-up' />}</Route>
         </Switch>
         <Footer />
+
+        <InfoTooltip
+          name={'info'}
+          isOpen={isInfoTooltipOpen}
+          state={loggedIn}
+          onClose={closeAllPopups}
+        />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 

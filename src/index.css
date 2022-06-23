@@ -68,6 +68,10 @@
 /* POPUP-FORM-EDIT-AVATAR */
 @import url(../src/blocks/popup/_edit-avatar/popup_edit-avatar.css);
 @import url(../src/blocks/popup/__input/_type_avatar/popup__input_type_avatar.css);
+/* POPUP-INFO */
+@import url(../src/blocks/popup/_info/popup_info.css);
+@import url(../src/blocks/popup/__icon/popup__icon.css);
+@import url(../src/blocks/popup/__text/popup__text.css);
 /* FORM */
 @import url(../src/blocks/form/form.css);
 @import url(../src/blocks/form/__title/form__title.css);
