@@ -180,6 +180,30 @@ function App() {
       .catch(handleError);
   }
 
+    // HANDLE CLOSE
+    useEffect(() => {
+      function handleEscClose(e) {
+        const ESC_CODE = 'Escape';
+        if (e.key === ESC_CODE) {
+          closeAllPopups();
+        }
+      }
+      document.addEventListener('keydown', handleEscClose);
+      return () => document.removeEventListener('keydown', handleEscClose);
+    }, []);
+  
+    useEffect(() => {
+      function handleOverlayClose(e) {
+        if (e.target.classList.contains('popup_opened')) {
+          closeAllPopups();
+        }
+      }
+      document.addEventListener('click', handleOverlayClose);
+      return () => {
+        document.removeEventListener('click', handleOverlayClose);
+      };
+    }, []);
+    
   // CLOSE POPUPS
   function closeAllPopups() {
     setIsAvatarPopupOpen(false);
