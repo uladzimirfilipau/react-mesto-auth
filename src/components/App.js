@@ -1,15 +1,21 @@
-import { useState, useEffect } from "react";
-import Header from "./Header";
-import Main from "./Main";
-import PopupWithForm from "./PopupWithForm";
-import Footer from "./Footer";
-import api from "../utils/api.js";
-import handleError from "../utils/utils.js";
-import ImagePopup from "./ImagePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import EditProfilePopup from "./EditProfilePopup";
-import AddPlacePopup from "./AddPlacePopup";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+
+import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import EditProfilePopup from './EditProfilePopup';
+import AddPlacePopup from './AddPlacePopup';
+
+import api from '../utils/api.js';
+import handleError from '../utils/utils.js';
+
+import Register from './Register';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -117,7 +123,11 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
         />
-
+        <Switch>
+          <Route path='/sign-up'>
+            <Register onRegister={handleRegister} />
+          </Route>
+        </Switch>
         <Footer />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
@@ -141,9 +151,9 @@ function App() {
         />
         {/* POPUP-DELETE-CARD */}
         <PopupWithForm
-          name={"delete-card"}
-          title={"Вы уверены?"}
-          buttonText={"Да"}
+          name={'delete-card'}
+          title={'Вы уверены?'}
+          buttonText={'Да'}
           isOpen={false}
           onClose={closeAllPopups}
         />
