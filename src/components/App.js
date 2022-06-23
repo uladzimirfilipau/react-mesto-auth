@@ -25,6 +25,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
+  // GET DATA
   useEffect(() => {
     api
       .getInitialData()
@@ -36,6 +37,7 @@ function App() {
       .catch(handleError);
   }, []);
 
+  // OPEN POPUPS
   function handleEditAvatarClick() {
     setIsAvatarPopupOpen(true);
   }
@@ -52,6 +54,7 @@ function App() {
     setSelectedCard(dataCard);
   }
 
+  // CARD LIKE
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
@@ -63,6 +66,7 @@ function App() {
       .catch(handleError);
   }
 
+  // CARD DELETE
   function handleCardDelete(card) {
     api
       .deleteCard(card._id)
@@ -72,6 +76,7 @@ function App() {
       .catch(handleError);
   }
 
+  // UPDATE USERDATA
   function handleUpdateUser(data) {
     api
       .editProfileInfo(data)
@@ -82,6 +87,7 @@ function App() {
       .catch(handleError);
   }
 
+  // UPDATE AVATAR
   function handleUpdateAvatar(data) {
     api
       .editProfileAvatar(data)
@@ -92,6 +98,7 @@ function App() {
       .catch(handleError);
   }
 
+  // ADD PLACE
   function handleAddPlaceSubmit(data) {
     api
       .addCard(data)
@@ -102,6 +109,7 @@ function App() {
       .catch(handleError);
   }
 
+  // CLOSE POPUPS
   function closeAllPopups() {
     setIsAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -126,6 +134,10 @@ function App() {
         <Switch>
           <Route path='/sign-up'>
             <Register onRegister={handleRegister} />
+          </Route>
+
+          <Route path='/sign-in'>
+            <Login onLogin={handleLogin} />
           </Route>
         </Switch>
         <Footer />
