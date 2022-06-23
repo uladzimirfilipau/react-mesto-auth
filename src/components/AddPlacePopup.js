@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import PopupWithForm from "./PopupWithForm";
+import { useState, useEffect } from 'react';
+import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-  const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const [name, setName] = useState('');
+  const [link, setLink] = useState('');
 
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setLink("");
+      setName('');
+      setLink('');
     }
   }, [isOpen]);
 
@@ -31,37 +31,37 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
 
   return (
     <PopupWithForm
-      name={"add-card"}
-      title={"Новое место"}
-      buttonText={"Создать"}
+      name={'add-card'}
+      title={'Новое место'}
+      buttonText={'Создать'}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
       <input
-        type="text"
-        name="name"
-        id="place-name"
-        placeholder="Название"
+        type='text'
+        name='name'
+        id='place-name'
+        placeholder='Название'
         required
-        minLength="2"
-        maxLength="30"
-        className="popup__input popup__input_type_title"
+        minLength='2'
+        maxLength='30'
+        className='popup__input popup__input_type_title'
         value={name}
         onChange={handleNameChange}
       />
-      <span className="popup__error place-name-error"/>
+      <span className='popup__error place-name-error' />
       <input
-        type="url"
-        name="link"
-        id="link"
-        placeholder="Ссылка на картинку"
+        type='url'
+        name='link'
+        id='link'
+        placeholder='Ссылка на картинку'
         required
-        className="popup__input popup__input_type_link"
+        className='popup__input popup__input_type_link'
         value={link}
         onChange={handleLinkChange}
       />
-      <span className="popup__error link-error"/>
+      <span className='popup__error link-error' />
     </PopupWithForm>
   );
 }

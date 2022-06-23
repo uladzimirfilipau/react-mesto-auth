@@ -1,7 +1,7 @@
-import React from "react";
-import editAvatar from "../images/edit-avatar.png";
-import Card from "./Card";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import React from 'react';
+import editAvatar from '../images/edit-avatar.png';
+import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({
   onEditAvatar,
@@ -15,39 +15,39 @@ function Main({
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
-    <main className="content">
+    <main className='content'>
       {/* PROFILE */}
-      <section className="profile">
-        <div className="profile__avatar-container">
+      <section className='profile'>
+        <div className='profile__avatar-container'>
           <img
             src={editAvatar}
-            alt="Обновить аватар"
-            className="profile__avatar-edit"
+            alt='Обновить аватар'
+            className='profile__avatar-edit'
             onClick={onEditAvatar}
           />
-          <img src={currentUser.avatar} alt="Аватар пользователя" className="profile__avatar" />
+          <img src={currentUser.avatar} alt='Аватар пользователя' className='profile__avatar' />
         </div>
-        <div className="profile__info">
-          <div className="profile__title-container">
-            <h1 className="profile__title">{currentUser.name}</h1>
+        <div className='profile__info'>
+          <div className='profile__title-container'>
+            <h1 className='profile__title'>{currentUser.name}</h1>
             <button
-              aria-label="Редактировать профиль"
-              className="profile__button-edit"
+              aria-label='Редактировать профиль'
+              className='profile__button-edit'
               onClick={onEditProfile}
             />
           </div>
-          <p className="profile__subtitle">{currentUser.about}</p>
+          <p className='profile__subtitle'>{currentUser.about}</p>
         </div>
         <button
-          aria-label="Добавить карточку"
-          className="profile__button-add"
+          aria-label='Добавить карточку'
+          className='profile__button-add'
           onClick={onAddPlace}
         />
       </section>
       {/* ELEMENTS */}
-      <section className="elements" aria-label="Карточки">
+      <section className='elements' aria-label='Карточки'>
         {/* ADD CARD CONTAINER */}
-        <ul className="elements__list">
+        <ul className='elements__list'>
           {cards.map((card) => (
             <Card
               key={card._id}

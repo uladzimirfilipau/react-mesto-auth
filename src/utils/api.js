@@ -29,7 +29,7 @@ class Api {
 
   editProfileAvatar(data) {
     return fetch(`${this._url}users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
@@ -39,7 +39,7 @@ class Api {
 
   editProfileInfo(data) {
     return fetch(`${this._url}users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -50,7 +50,7 @@ class Api {
 
   addCard(data) {
     return fetch(`${this._url}cards`, {
-      method: "POST",
+      method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -61,13 +61,13 @@ class Api {
 
   deleteCard(_id) {
     return fetch(`${this._url}cards/${_id}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: this._headers,
     }).then(this._getRes);
   }
 
   changeLikeCardStatus(cardId, like) {
-    const methodName = like ? "PUT" : "DELETE";
+    const methodName = like ? 'PUT' : 'DELETE';
     return fetch(`${this._url}cards/${cardId}/likes`, {
       method: methodName,
       headers: this._headers,
@@ -76,10 +76,10 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-40/",
+  url: 'https://mesto.nomoreparties.co/v1/cohort-40/',
   headers: {
-    authorization: "d16804bc-f4c3-4d6d-8780-e08fffa15972",
-    "Content-Type": "application/json",
+    authorization: 'd16804bc-f4c3-4d6d-8780-e08fffa15972',
+    'Content-Type': 'application/json',
   },
 });
 
