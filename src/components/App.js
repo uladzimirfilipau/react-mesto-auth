@@ -65,6 +65,30 @@ function App() {
       .catch(handleError);
   }, []);
 
+  // HANDLE CLOSE
+  useEffect(() => {
+    function handleEscClose(e) {
+      const ESC_CODE = 'Escape';
+      if (e.key === ESC_CODE) {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener('keydown', handleEscClose);
+    return () => document.removeEventListener('keydown', handleEscClose);
+  }, []);
+
+  useEffect(() => {
+    function handleOverlayClose(e) {
+      if (e.target.classList.contains('popup_opened')) {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener('click', handleOverlayClose);
+    return () => {
+      document.removeEventListener('click', handleOverlayClose);
+    };
+  }, []);
+
   // REGISTER
   function handleRegister(data) {
     auth
@@ -95,8 +119,8 @@ function App() {
       .catch(handleError);
   }
 
-  // LOGOUT
-  function handleLogout() {
+  // SIGNOUT
+  function handleSignOut() {
     localStorage.removeItem('jwt');
     setEmail('');
     setLoggedIn(false);
@@ -180,30 +204,6 @@ function App() {
       .catch(handleError);
   }
 
-    // HANDLE CLOSE
-    useEffect(() => {
-      function handleEscClose(e) {
-        const ESC_CODE = 'Escape';
-        if (e.key === ESC_CODE) {
-          closeAllPopups();
-        }
-      }
-      document.addEventListener('keydown', handleEscClose);
-      return () => document.removeEventListener('keydown', handleEscClose);
-    }, []);
-  
-    useEffect(() => {
-      function handleOverlayClose(e) {
-        if (e.target.classList.contains('popup_opened')) {
-          closeAllPopups();
-        }
-      }
-      document.addEventListener('click', handleOverlayClose);
-      return () => {
-        document.removeEventListener('click', handleOverlayClose);
-      };
-    }, []);
-    
   // CLOSE POPUPS
   function closeAllPopups() {
     setIsAvatarPopupOpen(false);
@@ -217,7 +217,7 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header email={email} onLogout={handleLogout} />
+        <Header email={email} onSignOut={handleSignOut} />
 
         <Switch>
           <ProtectedRoute
