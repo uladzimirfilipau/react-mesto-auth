@@ -6,11 +6,11 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
+import DeletePlacePopup from './DeletePlacePopup';
 
 import api from '../utils/api.js';
 import handleError from '../utils/utils.js';
@@ -30,16 +30,13 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isDeletePlacePopupOpen, setIsDeletePlacePopupOpen] = useState(false);
+  const [cardId, setCardId] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
   const history = useHistory();
 
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     history.push('/');
-  //   }
-  // }, [history, loggedIn]);
-
+  // CHECK TOKEN
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
 
@@ -123,6 +120,11 @@ function App() {
     setSelectedCard(dataCard);
   }
 
+  function handleDeleteCardClick(card) {
+    setIsDeletePlacePopupOpen(true);
+    setCardId(card._id);
+  }
+
   // CARD LIKE
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -136,11 +138,11 @@ function App() {
   }
 
   // CARD DELETE
-  function handleCardDelete(card) {
+  function handleCardDelete() {
     api
-      .deleteCard(card._id)
+      .deleteCard(cardId)
       .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id && c));
+        setCards((cards) => cards.filter((c) => c._id !== cardId && c));
       })
       .catch(handleError);
   }
@@ -185,6 +187,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(null);
     setIsInfoTooltipOpen(false);
+    setIsDeletePlacePopupOpen(false);
   }
 
   return (
@@ -204,7 +207,7 @@ function App() {
             cards={cards}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardDelete={handleDeleteCardClick}
           />
 
           <Route path='/sign-up'>
@@ -245,13 +248,11 @@ function App() {
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />
-        {/* POPUP-DELETE-CARD */}
-        <PopupWithForm
-          name={'delete-card'}
-          title={'Вы уверены?'}
-          buttonText={'Да'}
-          isOpen={false}
+
+        <DeletePlacePopup
+          isOpen={isDeletePlacePopupOpen}
           onClose={closeAllPopups}
+          onCardDelete={handleCardDelete}
         />
       </CurrentUserContext.Provider>
     </>
