@@ -4,6 +4,9 @@
 /* HEADER */
 @import url(../src/blocks/header/header.css);
 @import url(../src/blocks/header/__logo/header__logo.css);
+@import url(../src/blocks/header/__menu/header__menu.css);
+@import url(../src/blocks/header/__email/header__email.css);
+@import url(../src/blocks/header/__link/header__link.css);
 /* CONTENT */
 @import url(../src/blocks/content/content.css);
 /* PROFILE */

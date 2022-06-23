@@ -1,5 +1,5 @@
-import { useState, useEffect, } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 import Header from './Header';
@@ -20,6 +20,8 @@ import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
 import InfoTooltip from './InfoTooltip';
 
+import * as auth from '../auth';
+
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -28,6 +30,30 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loggedIn) {
+      history.push('/');
+    }
+  }, [history, loggedIn]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then(({ data }) => {
+          const { email } = data;
+          setEmail(email);
+          setLoggedIn(true);
+        })
+        .catch(handleError);
+    }
+  }, []);
 
   // GET DATA
   useEffect(() => {
@@ -40,6 +66,42 @@ function App() {
       })
       .catch(handleError);
   }, []);
+
+  // REGISTER
+  function handleRegister(data) {
+    auth
+      .register(data)
+      .then(() => {
+        setLoggedIn(true);
+        history.push('/sign-in');
+      })
+      .catch(() => {
+        setLoggedIn(false);
+      })
+      .finally(() => {
+        setIsInfoTooltipOpen(true);
+      });
+  }
+
+  // LOGIN
+  function handleLogin({ email, password }) {
+    auth
+      .authorize({ email, password })
+      .then(({ token }) => {
+        localStorage.setItem('jwt', token);
+        setLoggedIn(true);
+        setEmail(email);
+      })
+      .catch(handleError);
+  }
+
+  // LOGOUT
+  function handleLogout() {
+    localStorage.removeItem('jwt');
+    setEmail('');
+    setLoggedIn(false);
+    history.push('/sign-in');
+  }
 
   // OPEN POPUPS
   function handleEditAvatarClick() {
