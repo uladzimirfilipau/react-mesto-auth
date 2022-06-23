@@ -34,11 +34,11 @@ function App() {
   const [email, setEmail] = useState('');
   const history = useHistory();
 
-  useEffect(() => {
-    if (loggedIn) {
-      history.push('/');
-    }
-  }, [history, loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     history.push('/');
+  //   }
+  // }, [history, loggedIn]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
@@ -50,10 +50,11 @@ function App() {
           const { email } = data;
           setEmail(email);
           setLoggedIn(true);
+          history.push('/');
         })
         .catch(handleError);
     }
-  }, []);
+  }, [history]);
 
   // GET DATA
   useEffect(() => {
@@ -71,14 +72,15 @@ function App() {
   function handleRegister(data) {
     auth
       .register(data)
-      .then(() => {
-        setLoggedIn(true);
-        history.push('/sign-in');
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          setIsInfoTooltipOpen(true);
+          history.push('/sign-in');
+        }
       })
       .catch(() => {
         setLoggedIn(false);
-      })
-      .finally(() => {
         setIsInfoTooltipOpen(true);
       });
   }
@@ -91,6 +93,7 @@ function App() {
         localStorage.setItem('jwt', token);
         setLoggedIn(true);
         setEmail(email);
+        history.push('/');
       })
       .catch(handleError);
   }
@@ -187,22 +190,23 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
+        <Header email={email} onLogout={handleLogout} />
 
-        <ProtectedRoute
-          exact
-          path='/'
-          loggedIn={loggedIn}
-          component={Main}
-          onEditAvatar={handleEditAvatarClick}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          cards={cards}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
         <Switch>
+          <ProtectedRoute
+            exact
+            path='/'
+            loggedIn={loggedIn}
+            component={Main}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            cards={cards}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
+          />
+
           <Route path='/sign-up'>
             <Register onRegister={handleRegister} />
           </Route>
