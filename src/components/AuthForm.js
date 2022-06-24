@@ -1,18 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function AuthForm({ 
-  email, 
-  password, 
-  title, 
-  buttonText, 
-  captionText,
-  linkText,
+function AuthForm({
+  email,
+  password,
+  title,
+  buttonText,
+  children,
   handleEmailChange,
   handlePasswordChange,
-  handleSubmit 
+  handleSubmit,
 }) {
-
   return (
     <form className='form' onSubmit={handleSubmit}>
       <h2 className='form__title'>{title}</h2>
@@ -47,12 +44,7 @@ function AuthForm({
         {buttonText}
       </button>
 
-      <p className='form__caption'>
-        {captionText}&nbsp;
-        <Link to='sign-up' className='form__link'>
-          {linkText}
-        </Link>
-      </p>
+      {children}
     </form>
   );
 }
