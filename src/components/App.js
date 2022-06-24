@@ -242,6 +242,10 @@ function App() {
           </Route>
 
           <Route>{loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-up' />}</Route>
+
+          <Route path='*'>
+            <PageNotFound />
+          </Route>
         </Switch>
         <Footer />
 
