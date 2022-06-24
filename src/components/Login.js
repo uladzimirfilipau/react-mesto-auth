@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import AuthForm from './AuthForm';
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -18,39 +20,20 @@ function Login({ onLogin }) {
   }
 
   return (
-    <form className='form' onSubmit={handleSubmit}>
-      <h2 className='form__title'>Вход</h2>
-
-      <input
-        className='form__input form__input_type_email'
-        placeholder='Email'
-        name='email'
-        type='email'
-        id='email'
-        value={email}
-        onChange={handleEmailChange}
-        minLength='8'
-        maxLength='40'
-        required
-      />
-
-      <input
-        className='form__input form__input_type_password'
-        placeholder='Пароль'
-        name='password'
-        type='password'
-        id='password'
-        value={password}
-        onChange={handlePasswordChange}
-        minLength='8'
-        maxLength='40'
-        required
-      />
-
-      <button type='submit' className='form__submit-button'>
-        Войти
-      </button>
-    </form>
+    <AuthForm
+      title={'Вход'}
+      buttonText={'Войти'}
+      handleEmailChange={handleEmailChange}
+      handlePasswordChange={handlePasswordChange}
+      onSubmit={handleSubmit}
+    >
+      <p className='form__caption'>
+        Не зарегистрированы?&nbsp;
+        <Link to='sign-up' className='form__link'>
+          Регистрация
+        </Link>
+      </p>
+    </AuthForm>
   );
 }
 

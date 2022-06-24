@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AuthForm from './AuthForm';
 
 function Register({ onRegister }) {
   const [email, setEmail] = useState('');
@@ -19,45 +20,20 @@ function Register({ onRegister }) {
   }
 
   return (
-    <form className='form' onSubmit={handleSubmit}>
-      <h2 className='form__title'>Регистрация</h2>
-      <input
-        className='form__input form__input_type_email'
-        placeholder='Email'
-        name='email'
-        type='email'
-        id='email'
-        value={email}
-        onChange={handleEmailChange}
-        minLength='8'
-        maxLength='40'
-        required
-      />
-
-      <input
-        className='form__input form__input_type_password'
-        placeholder='Пароль'
-        name='password'
-        type='password'
-        id='password'
-        value={password}
-        onChange={handlePasswordChange}
-        minLength='8'
-        maxLength='40'
-        required
-      />
-
-      <button type='submit' className='form__submit-button'>
-        Зарегистрироваться
-      </button>
-
-      <p className='form__signin'>
+    <AuthForm
+      title={'Регистрация'}
+      buttonText={'Зарегистрироваться'}
+      handleEmailChange={handleEmailChange}
+      handlePasswordChange={handlePasswordChange}
+      onSubmit={handleSubmit}
+    >
+      <p className='form__caption'>
         Уже зарегистрированы?&nbsp;
         <Link to='sign-in' className='form__link'>
           Войти
         </Link>
       </p>
-    </form>
+    </AuthForm>
   );
 }
 
