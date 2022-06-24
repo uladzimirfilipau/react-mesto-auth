@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import AuthForm from './AuthForm';
 
 function Login({ onLogin }) {
@@ -21,19 +20,16 @@ function Login({ onLogin }) {
 
   return (
     <AuthForm
+      email={email}
+      password={password}
       title={'Вход'}
       buttonText={'Войти'}
+      captionText={'Не зарегистрированы?'}
+      linkText={'Регистрация'}
       handleEmailChange={handleEmailChange}
       handlePasswordChange={handlePasswordChange}
       onSubmit={handleSubmit}
-    >
-      <p className='form__caption'>
-        Не зарегистрированы?&nbsp;
-        <Link to='sign-up' className='form__link'>
-          Регистрация
-        </Link>
-      </p>
-    </AuthForm>
+    />
   );
 }
 

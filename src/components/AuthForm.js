@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function AuthForm({ 
   email, 
   password, 
   title, 
   buttonText, 
-  children,
+  captionText,
+  linkText,
   handleEmailChange,
   handlePasswordChange,
   handleSubmit 
@@ -45,7 +47,12 @@ function AuthForm({
         {buttonText}
       </button>
 
-      {children}
+      <p className='form__caption'>
+        {captionText}&nbsp;
+        <Link to='sign-up' className='form__link'>
+          {linkText}
+        </Link>
+      </p>
     </form>
   );
 }
