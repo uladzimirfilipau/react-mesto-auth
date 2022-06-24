@@ -1,6 +1,6 @@
 import React from 'react';
-import iconApprove from '../images/icon-approve.svg';
-import iconReject from '../images/icon-reject.svg';
+import iconApprove from '../../images/icon-approve.svg';
+import iconReject from '../../images/icon-reject.svg';
 
 function InfoTooltip({ state, name, isOpen, onClose }) {
 

@@ -6,21 +6,20 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 
-import ImagePopup from './ImagePopup';
-import EditAvatarPopup from './EditAvatarPopup';
-import EditProfilePopup from './EditProfilePopup';
-import AddPlacePopup from './AddPlacePopup';
-import DeletePlacePopup from './DeletePlacePopup';
+import ImagePopup from './popups/ImagePopup';
+import EditAvatarPopup from './popups/EditAvatarPopup';
+import EditProfilePopup from './popups/EditProfilePopup';
+import AddPlacePopup from './popups/AddPlacePopup';
+import DeletePlacePopup from './popups/DeletePlacePopup';
 
 import api from '../utils/api.js';
 import handleError from '../utils/utils.js';
+import * as auth from '../utils/auth';
 
 import Register from './Register';
 import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
-import InfoTooltip from './InfoTooltip';
-
-import * as auth from '../auth';
+import InfoTooltip from './popups/InfoTooltip';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
