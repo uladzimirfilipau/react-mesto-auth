@@ -11,6 +11,7 @@ import EditAvatarPopup from './popups/EditAvatarPopup';
 import EditProfilePopup from './popups/EditProfilePopup';
 import AddPlacePopup from './popups/AddPlacePopup';
 import DeletePlacePopup from './popups/DeletePlacePopup';
+import InfoTooltip from './popups/InfoTooltip';
 
 import api from '../utils/api.js';
 import handleError from '../utils/utils.js';
@@ -19,7 +20,6 @@ import * as auth from '../utils/auth';
 import Register from './Register';
 import Login from './Login';
 import ProtectedRoute from './ProtectedRoute';
-import InfoTooltip from './popups/InfoTooltip';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -221,7 +221,7 @@ function App() {
         <Switch>
           <ProtectedRoute
             exact
-            path='/'
+            path='/mesto-react-auth'
             loggedIn={loggedIn}
             component={Main}
             onEditAvatar={handleEditAvatarClick}
@@ -242,6 +242,10 @@ function App() {
           </Route>
 
           <Route>{loggedIn ? <Redirect to='/' /> : <Redirect to='/sign-up' />}</Route>
+
+          <Route path='*'>
+            <PageNotFound />
+          </Route>
         </Switch>
         <Footer />
 
