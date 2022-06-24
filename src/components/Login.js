@@ -25,9 +25,9 @@ function Login({ onLogin }) {
       password={password}
       title={'Вход'}
       buttonText={'Войти'}
+      handleSubmit={handleSubmit}
       handleEmailChange={handleEmailChange}
       handlePasswordChange={handlePasswordChange}
-      onSubmit={handleSubmit}
     >
       <p className='form__caption'>
         Не зарегистрированы?&nbsp;

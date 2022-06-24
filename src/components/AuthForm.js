@@ -45,6 +45,7 @@ function AuthForm({
       </button>
 
       {children}
+
     </form>
   );
 }

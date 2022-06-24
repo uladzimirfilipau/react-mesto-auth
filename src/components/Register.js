@@ -25,9 +25,9 @@ function Register({ onRegister }) {
       password={password}
       title={'Регистрация'}
       buttonText={'Зарегистрироваться'}
+      handleSubmit={handleSubmit}
       handleEmailChange={handleEmailChange}
       handlePasswordChange={handlePasswordChange}
-      onSubmit={handleSubmit}
     >
       <p className='form__caption'>
         Уже зарегистрированы?&nbsp;
