@@ -221,7 +221,7 @@ function App() {
         <Switch>
           <ProtectedRoute
             exact
-            path='/mesto-react-auth'
+            path='/'
             loggedIn={loggedIn}
             component={Main}
             onEditAvatar={handleEditAvatarClick}
