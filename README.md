@@ -14,7 +14,6 @@
 - Локальное хранилище
 - Компоненты
 - Макет
-- Готовая страница
 
 **Функциональность проекта**
 - На странице отрисовывается информация о пользователе и карточках.
@@ -63,7 +62,3 @@
 * [Ссылка3 на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
 * [Ссылка4 на макет в Figma](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript-9-sprint?node-id=0%3A1)
 * [Ссылка5 на макет в Figma](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/Sprint-14-RU?node-id=0%3A1)
-
-**Готовая страница**
-
-* Готовую страницу можно посмотреть по адресу [https://uladzimirfilipau.github.io/react-mesto-auth/](https://uladzimirfilipau.github.io/react-mesto-auth/)
